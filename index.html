@@ -38,7 +38,27 @@
     <div>${ price | commaFormat | priceFormat }</div>
   </div>
 
+  <div id="app-8">
+    <!-- 將 message 呈現於UI -->
+    <p>{{ msg }}</p>
+    
+    <hr>
+    
+    <!-- 取得使用者當前輸入，更新 userInput -->
+    <!-- 當 userInput 更新，也會同步輸入框數值 -->
+    <input  type="text" v-model="userInput" />
+    
+  </div>
+
   <script>
+
+    var app8 = new Vue({
+      el: '#app-8',
+      data: {
+        msg: 'Vue rock!',
+        userInput: ''
+      }
+    });
 
     var app7 = new Vue({
       el: '#app-7',
