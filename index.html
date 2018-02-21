@@ -15,7 +15,71 @@
     </span > 
   </div >
 
+  <div  id = "app-3" > 
+    <p v-if = "seen" >
+      現在你看到我了
+    </p> 
+  </div>
+
+  <div id="app-5">
+    <ol>
+      <li v-for="todo in todos">
+        {{ todo.text }}
+      </li>
+    </ol>
+  </div>
+
+  <div id="app-6">
+    <p>{{ message }}</p>
+    <button v-on:click="reverseMessage">逆转消息</button>
+  </div>
+
+  <div id="app-7">
+    <div>${ price | commaFormat | priceFormat }</div>
+  </div>
+
   <script>
+
+    var app7 = new Vue({
+      el: '#app-7',
+      delimiters: ['${', '}'],
+      data: {
+        price: ""
+      },
+      filters: {
+        priceFormat: function(value) { // 加上 $ 字號
+          return '$' + value
+        },
+        commaFormat: function(value) { // 加上千分位符號
+          return value.toString().replace(/^(-?\d+?)((?:\d{3})+)(?=\.\d+$|$)/, function (all, pre, groupOf3Digital) {
+            return pre + groupOf3Digital.replace(/\d{3}/g, ',$&');
+          })
+        }
+      }
+    });
+
+    var app6 = new Vue({
+      el: '#app-6',
+      data: {
+        message: '逆转消息!'
+      },
+      methods: {
+        reverseMessage: function () {
+          this.message = this.message.split('').reverse().join('')
+        }
+      }
+    })
+
+    var app5 = new Vue({
+      el: '#app-5',
+      data: {
+        todos: [
+          { text: '学习 JavaScript' },
+          { text: '学习 Vue' },
+          { text: '整个牛项目' }
+        ]
+      }
+    })
     var app = new Vue({
       el: '#app',
       data: {
@@ -29,6 +93,15 @@
         message: '頁面加載於' + new  Date ().toLocaleString() 
       } 
     })
+
+    var app3 = new Vue({ 
+      el: '#app-3' , 
+      data: { 
+        seen: true
+       } 
+    })
+
+
   </script>
 </body>
 </html>
